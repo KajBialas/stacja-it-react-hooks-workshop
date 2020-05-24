@@ -1,41 +1,10 @@
-import React, { useReducer, useEffect } from 'react';
-
-const INITIAL_STATE = {
-  data: [],
-  isLoading: false,
-  isError: false,
-};
-
-const USERS_ACTION_TYPES = {
-  LOADING: 'USERS_LOADING',
-  ERROR: 'USERS_ERROR',
-  SUCCESS: 'USERS_SUCCESS',
-};
-
-function usersReducer(state, action) {
-  switch(action.type) {
-    case USERS_ACTION_TYPES.LOADING:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case USERS_ACTION_TYPES.ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-      };
-    case USERS_ACTION_TYPES.SUCCESS:
-      return {
-        isLoading: false,
-        isError: false,
-        data: [...action.data],
-      }
-  }
-}
+import React, { useReducer, useEffect, useContext } from 'react';
+import { INITIAL_STATE, USERS_ACTION_TYPES, usersReducer} from './UsersReducer';
+import { UserContext } from './App';
 
 function Users() {
   const [usersState, dispatch] = useReducer(usersReducer, INITIAL_STATE);
+  const userEmail = useContext(UserContext)
 
   useEffect(() => {
     dispatch({type: USERS_ACTION_TYPES.LOADING});
@@ -58,6 +27,8 @@ function Users() {
       {usersState.isLoading && <div>Ładowanie danych</div>}
       {usersState.isError && <div>Bład pobierania danych</div>}
       {renderUsers()}
+      <div>Obecny użytkownik: {userEmail.userEmail}</div>
+      <button onClick={userEmail.login}>LOGUJ</button>
     </div>
   )
 }
