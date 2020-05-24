@@ -5,7 +5,21 @@ class Counter extends Component {
     counter: 0,
   };
 
-  incrementCounter = () => this.setState((prevState) => ({counter: prevState.counter + 1}));
+  incrementCounter = () => this.setState({
+    counter: this.state.counter + 1,
+  });
+
+  componentDidMount() {
+    // console.log('MOUNT');
+  }
+
+  componentDidUpdate() {
+    // console.log('UPDATE');
+  }
+
+  componentWillUnmount() {
+    // console.log('WILL UNMOUNT');
+  }
 
   render() {
     console.log('RENDER');

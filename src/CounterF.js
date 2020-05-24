@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function CounterF() {
   const [counterValue, setCounterValue] = useState(10);
@@ -14,6 +14,14 @@ function CounterF() {
   const resetCounter = () => {
     setCounterValue(10)
   };
+
+  useEffect(() => {
+    console.log('DIDMOUNT / DIDUPDATE');
+
+    return () => {
+      console.log('WILL UNMOUNT')
+    }
+  }, [counterValue]);
 
   return (
     <div>
