@@ -1,35 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer } from 'react';
+
+function counterReducer(state, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return {value: state.value + 1};
+    case 'DECREMENT':
+      return {value: state.value - 1};
+    case 'RESET':
+      return {value: 0};
+  }
+};
 
 function CounterF() {
-  const [counterValue, setCounterValue] = useState(10);
-
-  const incrementCounter = () => {
-    setCounterValue((prevState) => prevState + 1);
-  };
-
-  const decrementCounter = () => {
-    setCounterValue(counterValue - 1)
-  };
-
-  const resetCounter = () => {
-    setCounterValue(10)
-  };
-
-  useEffect(() => {
-    console.log('DIDMOUNT / DIDUPDATE');
-
-    return () => {
-      console.log('WILL UNMOUNT')
-    }
-  }, [counterValue]);
+  const [counterState, dispatch] = useReducer(counterReducer, {value: 0});
 
   return (
     <div>
       <h2>Counter:</h2>
-      <div>{counterValue}</div>
-      <button onClick={incrementCounter}>+</button>
-      <button onClick={decrementCounter}>-</button>
-      <button onClick={resetCounter}>RESET</button>
+      <div>{counterState.value}</div>
+      <button onClick={() => dispatch({type: 'INCREMENT'})}>+</button>
+      <button onClick={() => dispatch({type: 'DECREMENT'})}>-</button>
+      <button onClick={() => dispatch({type: 'RESET'})}>RESET</button>
     </div>
   )
 }
