@@ -2,12 +2,13 @@ import React from 'react';
 import Counter from './Counter';
 import CounterF from './CounterF';
 import WindowResize from './WindowsResize';
+import Header from './Header';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>Treść Strony - nagłówek</h1>
+      <Header />
       <Counter />
       <CounterF/>
       <WindowResize />
