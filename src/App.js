@@ -3,6 +3,7 @@ import Counter from './Counter';
 import CounterF from './CounterF';
 import WindowResize from './WindowsResize';
 import Header from './Header';
+import Users from './Users';
 import './App.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Counter />
       <CounterF/>
       <WindowResize />
+      <Users />
     </div>
   );
 }
